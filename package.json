@@ -1,0 +1,14 @@
+{
+  "name": "js-validators",
+  "version": "1.0.0",
+  "type": "module",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  },
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+  },
+  "jest": {
+    "transform": {}
+  }
+}

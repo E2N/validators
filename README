@@ -1,0 +1,9 @@
+A JavaScript module of validation functions. A validation function returns either true or false.
+
+Run the tests with the following command
+
+> node --experimental-vm-modules node_modules/jest/bin/jest.js
+
+or
+
+> NODE_OPTIONS='--experimental-vm-modules' jest
