@@ -1,0 +1,23 @@
+{
+  "name": "@e2ngmbh/validators",
+  "description": "JavaScript Validation Functions",
+  "version": "0.9.0",
+  "keywords": [
+    "validation",
+    "validators",
+    "predicates"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/E2N/validators.git"
+  },
+  "homepage": "https://github.com/E2N/validators",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jsdoc": "^4.0.2"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
