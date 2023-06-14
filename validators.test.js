@@ -1,6 +1,5 @@
-import { iban } from "./validators.mjs";
+import { iban, vsnr } from "./validators.mjs";
 
-/* https://www.iban.com/testibans */
 describe('iban', function() {
     test.each([
         ["AD1200012030200359100100",             true],
@@ -151,4 +150,19 @@ describe('iban', function() {
     ])('%s', (input, expected) => {
         expect(iban(input)).toBe(expected);
     });
+});
+
+describe('vsnr', function() {
+    test.each([
+        ["65180539W000", false],
+        ["65180539W001", true ],
+        ["65180539W002", false],
+        ["65180539W003", false],
+        ["65180539W004", false],
+        ["65180539W005", false],
+        ["65180539W006", false],
+        ["65180539W007", false],
+        ["65180539W008", false],
+        ["65180539W009", false]
+    ])('%s', (input, expected) => expect(vsnr(input)).toBe(expected));
 });

@@ -12,7 +12,7 @@ const iban_registry = new Map(Object.entries({
     "SV": 28, "TL": 23, "TN": 24, "TR": 26, "UA": 29, "VA": 22, "VG": 24, "XK": 20,
 }));
 
-/* piece-wise calculation of value mod 97                                                              */
+/* piece-wise calculation of number mod 97                                                              */
 function mod97(value) {
     let i = 0, j = 9;
     let n = parseInt(value.slice(i, 9)) % 97;
@@ -26,11 +26,22 @@ function mod97(value) {
     return n;
 }
 
+/* digit sum of number in base 10.                                                                     */
+function digit_sum(value) {
+    let digit_sum = 0;
+    while (value) {
+        digit_sum += value % 10;
+        value = Math.floor(value / 10);
+    }
+    return digit_sum;
+}
+
 /**
  * A validation function for International Bank Account Numbers (IBAN).
  * This validator returns true if the input is in a compliant format and passes the check-digit validation.
  * An IBAN is validated by converting it into an integer and performing mod-97 operation (as described in ISO 7064) on it.
  * @param {string} input
+ * @returns {boolean}
  */
 function iban(input) {
     /* Type check                                                                                           */
@@ -91,6 +102,49 @@ function iban(input) {
     return reminder === 1;
 }
 
+/**
+ * Verifies the "Deutsche Rentenversicherungsnummer" (VSNR) in Germany.
+ * Für jeden Versicherten in der gesetzlichen Rentenversicherung wird eine Versicherungsnummer vergeben.
+ * @param input
+ */
+function vsnr(input) {
+    /* Type check                                                                                           */
+    if (typeof input !== "string") {
+        return false;
+    }
+
+    /* Length check                                                                                         */
+    if (input.length !== 12) {
+        return false;
+    }
+
+    let check_digit= parseInt(input.charAt(11));
+    const weights = [2, 1, 2, 5, 7, 1, 2, 1, 2, 1, 2, 1];
+
+    /* remove check digit and replace character at position 8 with its position in the alphabet             */
+    let number = input.slice(0,8) + input.charCodeAt(8) - 64 + input.slice(9, 11)
+
+    /* compute products and calculate digit sum                                                             */
+    let ds = 0;
+    for (let i = 0; i < weights.length; i++) {
+        ds += digit_sum((number.charCodeAt(i) - 48) * weights[i]);
+
+    }
+
+    /* verify                                                                                               */
+    return ds % 10 === check_digit;
+}
+
+/**
+ * Validates a <i>Betriebsnummer<i>.
+ * @param {string} input
+ * @returns {boolean}
+ */
+function betriebsnummer(input) {
+    return false;
+}
+
 export {
-    iban
+    iban,
+    vsnr
 }
