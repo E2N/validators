@@ -1,11 +1,15 @@
-A JavaScript module of validation functions. A validation function returns
-either true or false depending on the user input.
+# A JavaScript module of validation functions. 
+
+A validation function returns either true or false depending on the user input.
 
 This module contains several common validation functions:
+
 - International Bank Account Numbers (IBAN)
 - Deutsche Rentenversicherungsnummer (VSNR)
 - Deutscher Personalausweis
 - International Article Number (EAN)
+- Payment card numbers like VISA or Mastercard (PAN)
+- International Mobile Equipment Identity (IMEI)
 
 Run the tests with the following command
 

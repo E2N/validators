@@ -1,6 +1,10 @@
 {
-  "name": "js-validators",
+  "name": "@e2n/validators",
   "version": "1.0.0",
+  "description": "A module of common validation functions.",
+  "keywords": [ "validation", "validators", "predicates"],
+  "homepage": "https://github.com/E2N/validators",
+  "license": "Unlicense",
   "type": "module",
   "devDependencies": {
     "jest": "^29.5.0"
