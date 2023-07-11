@@ -1,4 +1,4 @@
-import { iban, vsnr } from "./validators.mjs";
+import { iban, vsnr, ean } from "./validators.mjs";
 
 describe('iban', function() {
     test.each([
@@ -165,4 +165,10 @@ describe('vsnr', function() {
         ["65180539W008", false],
         ["65180539W009", false]
     ])('%s', (input, expected) => expect(vsnr(input)).toBe(expected));
+});
+
+describe('ean', function() {
+    test.each([
+        ["40123455", true]
+    ])('%s', (input, expected) => expect(ean(input)).toBe(expected));
 });

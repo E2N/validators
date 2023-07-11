@@ -118,7 +118,7 @@ function vsnr(input) {
         return false;
     }
 
-    let check_digit= parseInt(input.charAt(11));
+    let check_digit = parseInt(input.charAt(11));
     const weights = [2, 1, 2, 5, 7, 1, 2, 1, 2, 1, 2, 1];
 
     /* remove check digit and replace character at position 8 with its position in the alphabet             */
@@ -135,6 +135,56 @@ function vsnr(input) {
     return ds % 10 === check_digit;
 }
 
+function ean(input) {
+    /* Type check                                                                                           */
+    if (typeof input !== "string") {
+        return false;
+    }
+
+    /* Length check                                                                                         */
+    if (input.length === 8) {
+       return ean8(input);
+    }
+
+    if (input.length === 8) {
+        return ean13(input);
+    }
+
+    if (input.length === 8) {
+        return ean18(input);
+    }
+
+    return false;
+}
+
+function ean8(input) {
+    let check_digit = parseInt(input.charAt(7));
+    let number = input.slice(0,8);
+    const weights = [ 3, 1, 3, 1, 3, 1, 3 ];
+
+    /* compute products and sum                                                                               */
+    let ps = 0;
+    for (let i = 0; i < weights.length; i++) {
+        ps += (number.charCodeAt(i) - 48) * weights[i];
+    }
+
+    if (ps % 10 == 0) {
+        return 0 == check_digit;
+    } else {
+        return (Math.ceil(ps / 10) * 10 - ps) == check_digit;
+    }
+}
+
+function ean13(input) {
+    return true;
+}
+
+function ean18(input) {
+    return true;
+}
+
+
+
 /**
  * Validates a <i>Betriebsnummer<i>.
  * @param {string} input
@@ -146,5 +196,6 @@ function betriebsnummer(input) {
 
 export {
     iban,
-    vsnr
+    vsnr,
+    ean
 }
