@@ -103,6 +103,31 @@ function iban(input) {
 }
 
 /**
+ * Krankenversichertennummer (KVNR) einer gesetzlichen Krankenkasse. Sie baut auf der
+ * Rentenversicherungsnummer auf und ist ein Leben lang gültig.
+ */
+function kvnr(input) {
+    /* Type check                                                                                           */
+    if (typeof input !== "string") {
+        return false;
+    }
+
+    /* Length check                                                                                         */
+    if (!(input.length === 30 || input.length === 30 )) {
+        return false;
+    }
+
+    /* Entweder 20 oder 30 Stellen */
+
+    /* Unveränderbarer, 10-stelliger Teil, z. B. Max Mustermann A123456789 */
+
+    /* Veränderbarer, 9-stelliger Teil (Institutionskennzeichen), z. B. 100696012 */
+
+    /* Prüfziffer */
+}
+
+
+/**
  * Verifies the "Deutsche Rentenversicherungsnummer" (VSNR) in Germany.
  * Für jeden Versicherten in der gesetzlichen Rentenversicherung wird eine Versicherungsnummer vergeben.
  * @param input
@@ -118,7 +143,9 @@ function vsnr(input) {
         return false;
     }
 
-    let check_digit = parseInt(input.charAt(11));
+
+    /* Modified Double-Add-Double-Methode or Luhn-Algorithmus                                               */
+    let check_digit= parseInt(input.charAt(11));
     const weights = [2, 1, 2, 5, 7, 1, 2, 1, 2, 1, 2, 1];
 
     /* remove check digit and replace character at position 8 with its position in the alphabet             */
