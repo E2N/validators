@@ -12,6 +12,13 @@ const iban_registry = new Map(Object.entries({
     "SV": 28, "TL": 23, "TN": 24, "TR": 26, "UA": 29, "VA": 22, "VG": 24, "XK": 20,
 }));
 
+/* EAN8, 13 and 18 weights                                                                              */
+const ean_weights = [
+    [ 3, 1, 3, 1, 3, 1, 3 ],
+    [ 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3 ],
+    [ 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3 ]
+];
+
 /* piece-wise calculation of number mod 97                                                              */
 function mod97(value) {
     let i = 0, j = 9;
@@ -35,6 +42,9 @@ function digit_sum(value) {
     }
     return digit_sum;
 }
+
+/* Luhn algorithm                                                                                      */
+
 
 /**
  * A validation function for International Bank Account Numbers (IBAN).
@@ -168,49 +178,27 @@ function ean(input) {
         return false;
     }
 
-    /* Length check                                                                                         */
-    if (input.length === 8) {
-       return ean8(input);
+    let weights = [];
+
+    /* Length check */
+    switch(input.length) {
+        case  8: weights = ean_weights[0]; break;
+        case 13: weights = ean_weights[1]; break;
+        case 18: weights = ean_weights[2]; break;
+        default: return false;
     }
 
-    if (input.length === 8) {
-        return ean13(input);
-    }
-
-    if (input.length === 8) {
-        return ean18(input);
-    }
-
-    return false;
-}
-
-function ean8(input) {
-    let check_digit = parseInt(input.charAt(7));
-    let number = input.slice(0,8);
-    const weights = [ 3, 1, 3, 1, 3, 1, 3 ];
+    let check_digit = parseInt(input.charAt(input.length - 1));
+    let digits = input.slice(0, input.length);
 
     /* compute products and sum                                                                               */
     let ps = 0;
     for (let i = 0; i < weights.length; i++) {
-        ps += (number.charCodeAt(i) - 48) * weights[i];
+        ps += (digits.charCodeAt(i) - 48) * weights[i];
     }
 
-    if (ps % 10 == 0) {
-        return 0 == check_digit;
-    } else {
-        return (Math.ceil(ps / 10) * 10 - ps) == check_digit;
-    }
+    return (Math.ceil(ps / 10) * 10 - ps) == check_digit;
 }
-
-function ean13(input) {
-    return true;
-}
-
-function ean18(input) {
-    return true;
-}
-
-
 
 /**
  * Validates a <i>Betriebsnummer<i>.

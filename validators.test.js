@@ -169,6 +169,9 @@ describe('vsnr', function() {
 
 describe('ean', function() {
     test.each([
-        ["40123455", true]
+        ["40123455", true],
+        ["41223455", false],
+        ["4006381333931", true],
+        ["376104250021234569", true]
     ])('%s', (input, expected) => expect(ean(input)).toBe(expected));
 });
