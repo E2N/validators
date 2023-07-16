@@ -1,3 +1,31 @@
+/** 
+* @license
+* This is free and unencumbered software released into the public domain.
+* 
+* Anyone is free to copy, modify, publish, use, compile, sell, or
+* distribute this software, either in source code form or as a compiled
+* binary, for any purpose, commercial or non-commercial, and by any
+* means.
+* 
+* In jurisdictions that recognize copyright laws, the author or authors
+* of this software dedicate any and all copyright interest in the
+* software to the public domain. We make this dedication for the benefit
+* of the public at large and to the detriment of our heirs and
+* successors. We intend this dedication to be an overt act of
+* relinquishment in perpetuity of all present and future rights to this
+* software under copyright law.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+* IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+* OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+* ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+* 
+* For more information, please refer to <https://unlicense.org>
+/*
+
 /** @module validators */
 
 /* IBAN REGISTRY Release 94 - Apr 2023                                                                  */
@@ -50,10 +78,16 @@ function digit_sum(value) {
  * A validation function for International Bank Account Numbers (IBAN).
  * This validator returns true if the input is in a compliant format and passes the check-digit validation.
  * An IBAN is validated by converting it into an integer and performing mod-97 operation (as described in ISO 7064) on it.
+ * @public
  * @param {string} input
  * @returns {boolean}
  */
 function iban(input) {
+    /* Null, undefined and blank check                                                                      */
+    if (!input) {
+        return false;
+    }
+
     /* Type check                                                                                           */
     if (typeof input !== "string") {
         return false;
@@ -112,11 +146,43 @@ function iban(input) {
     return reminder === 1;
 }
 
+function isbn(input) {
+    /* Null, undefined and blank check                                                                      */
+    if (!input) {
+        return false;
+    }
+
+    /* Type check                                                                                           */
+    if (typeof input !== "string") {
+        return false;
+    }
+
+    switch (input.length) {
+        case 10: return isbn10(input);
+        case 13: return isbn13(input);
+        default: return false;
+    }
+}
+
+function isbn10(input) {
+    return false;
+}
+
+function isbn13(input) {
+    return false
+}
+
 /**
  * Krankenversichertennummer (KVNR) einer gesetzlichen Krankenkasse. Sie baut auf der
  * Rentenversicherungsnummer auf und ist ein Leben lang gültig.
+ * @public
  */
 function kvnr(input) {
+    /* Null, undefined and blank check                                                                      */
+    if (!input) {
+        return false;
+    }
+
     /* Type check                                                                                           */
     if (typeof input !== "string") {
         return false;
@@ -140,9 +206,15 @@ function kvnr(input) {
 /**
  * Verifies the "Deutsche Rentenversicherungsnummer" (VSNR) in Germany.
  * Für jeden Versicherten in der gesetzlichen Rentenversicherung wird eine Versicherungsnummer vergeben.
+ * @public
  * @param input
  */
 function vsnr(input) {
+    /* Null, undefined and blank check                                                                      */
+    if (!input) {
+        return false;
+    }
+
     /* Type check                                                                                           */
     if (typeof input !== "string") {
         return false;
@@ -172,7 +244,18 @@ function vsnr(input) {
     return ds % 10 === check_digit;
 }
 
+/**
+ * Verifies a International Article Number (EAN). The same numbers can be referred to as GTINs.
+ * @public
+ * @param {string} input 
+ * @returns {boolean}
+ */
 function ean(input) {
+    /* Null, undefined and blank check                                                                      */
+    if (!input) {
+        return false;
+    }
+
     /* Type check                                                                                           */
     if (typeof input !== "string") {
         return false;
@@ -191,7 +274,7 @@ function ean(input) {
     let check_digit = parseInt(input.charAt(input.length - 1));
     let digits = input.slice(0, input.length);
 
-    /* compute products and sum                                                                               */
+    /* multiply every digit with its weight and sum the results                                                                             */
     let ps = 0;
     for (let i = 0; i < weights.length; i++) {
         ps += (digits.charCodeAt(i) - 48) * weights[i];
@@ -211,6 +294,7 @@ function betriebsnummer(input) {
 
 export {
     iban,
+    isbn,
     vsnr,
     ean
 }
