@@ -322,9 +322,33 @@ function betriebsnummer(input) {
     return false;
 }
 
+function nir(input) {
+    /* Null, undefined and blank check                                                                      */
+    if (!input) {
+        return false;
+    }
+
+    /* Type check                                                                                           */
+    if (typeof input !== "string") {
+        return false;
+    }
+
+    /* Length check                                                                                          */
+    if (input.length !== 15) {
+        return false;
+    }
+
+    /* syymmlloookkk cc */
+    let number = parseInt(input.slice(0, 13));
+    let check_digit = parseInt(input.slice(13));
+
+    return check_digit === 97 - number % 97;
+}
+
 module.exports = {
     iban,
     isbn,
     vsnr,
-    ean
+    ean,
+    nir
 }

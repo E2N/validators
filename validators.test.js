@@ -1,4 +1,4 @@
-const { iban, vsnr, ean, isbn } = require("./validators");
+const { iban, vsnr, ean, isbn, nir } = require("./validators");
 
 describe('iban', function() {
     test.each([
@@ -200,4 +200,10 @@ describe('isbn', function() {
         ["9789295055128", false],
         ["9789295055129", false]
     ])('%s', (input, expected) => expect(isbn(input)).toBe(expected));
+})
+
+describe('nir', function() {
+    test.each([
+        ["257053306399903", true]
+    ])('%s', (input, expected) => expect(nir(input)).toBe(expected));
 })

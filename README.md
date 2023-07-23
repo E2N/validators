@@ -1,6 +1,6 @@
 # A JavaScript module of validation functions. 
 
-A validation functions verifies user input.  A validation function returns either true or false 
+A validation functions verifies user input. A validation function returns true or false 
 depending on the user input. Usually is a checksum involved. The only purpose is to check the validity of the input value.
 
 ## Validation functions
