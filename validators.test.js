@@ -1,4 +1,4 @@
-import { iban, vsnr, ean } from "./validators.mjs";
+const { iban, vsnr, ean } = require("./validators");
 
 describe('iban', function() {
     test.each([

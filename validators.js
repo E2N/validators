@@ -26,8 +26,6 @@
 * For more information, please refer to <https://unlicense.org>
 /*
 
-/** @module validators */
-
 /* IBAN REGISTRY Release 94 - Apr 2023                                                                  */
 const iban_registry = new Map(Object.entries({
     "AD": 24, "AE": 23, "AL": 28, "AT": 20, "AZ": 28, "BA": 20, "BE": 16, "BG": 22, "BH": 22, "BI": 27, "BR": 29,
@@ -292,7 +290,7 @@ function betriebsnummer(input) {
     return false;
 }
 
-export {
+module.exports = {
     iban,
     isbn,
     vsnr,

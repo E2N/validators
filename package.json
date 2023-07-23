@@ -9,15 +9,11 @@
   ],
   "homepage": "https://github.com/E2N/validators",
   "license": "Unlicense",
-  "type": "module",
   "devDependencies": {
     "jest": "^29.5.0",
     "jsdoc": "^4.0.2"
   },
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
-  },
-  "jest": {
-    "transform": {}
+    "test": "jest"
   }
 }

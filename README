@@ -25,16 +25,6 @@ This module contains several common validation functions:
 
 ## Quick start
 
-Run the tests with the following command
-
-> node --experimental-vm-modules node_modules/jest/bin/jest.js
-
-or
-
-> NODE_OPTIONS='--experimental-vm-modules' jest
-
-or
-
 > npm test
 
 ## Documentation
@@ -42,7 +32,7 @@ or
 Unfortunately JSDoc does not really work with *.mjs files.
 Just rename the file and try again.
 
-> ./node_modules/.bin/jsdoc validators.mjs
+> ./node_modules/.bin/jsdoc validators.js
 
 ## License
 
