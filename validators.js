@@ -164,7 +164,23 @@ function isbn(input) {
 }
 
 function isbn10(input) {
-    return false;
+    let sum = 0;
+    sum += (input.charCodeAt(0)  - 48) * 1;
+    sum += (input.charCodeAt(1)  - 48) * 2;
+    sum += (input.charCodeAt(2)  - 48) * 3;
+    sum += (input.charCodeAt(3)  - 48) * 4;
+    sum += (input.charCodeAt(4)  - 48) * 5;
+    sum += (input.charCodeAt(5)  - 48) * 6;
+    sum += (input.charCodeAt(6)  - 48) * 7;
+    sum += (input.charCodeAt(7)  - 48) * 8;
+    sum += (input.charCodeAt(8)  - 48) * 9;
+    if (input.charAt(9) === 'X') {
+        sum += 100;
+    } else {
+        sum += (input.charCodeAt(9)  - 48) * 10;
+    }
+
+    return 0 === sum % 11;
 }
 
 function isbn13(input) {
