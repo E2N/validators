@@ -29,9 +29,6 @@ This module contains several common validation functions:
 
 ## Documentation
 
-Unfortunately JSDoc does not really work with *.mjs files.
-Just rename the file and try again.
-
 > ./node_modules/.bin/jsdoc validators.js
 
 ## License

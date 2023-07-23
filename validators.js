@@ -109,6 +109,7 @@ function iban(input) {
     /* Move the four initial characters to the end of the string                                            */
     let d = input.slice(4) + input.slice(0, 4);
 
+
     /* Replace each letter in the string with two digits                                                    */
     d = d.replaceAll("A", "10");
     d = d.replaceAll("B", "11");
@@ -167,7 +168,22 @@ function isbn10(input) {
 }
 
 function isbn13(input) {
-    return false
+    let check_digit= parseInt(input.charAt(12));
+    let sum = 0;
+    sum += (input.charCodeAt(0)  - 48);
+    sum += (input.charCodeAt(1)  - 48) * 3;
+    sum += (input.charCodeAt(2)  - 48);
+    sum += (input.charCodeAt(3)  - 48) * 3;
+    sum += (input.charCodeAt(4)  - 48);
+    sum += (input.charCodeAt(5)  - 48) * 3;
+    sum += (input.charCodeAt(6)  - 48);
+    sum += (input.charCodeAt(7)  - 48) * 3;
+    sum += (input.charCodeAt(8)  - 48);
+    sum += (input.charCodeAt(9)  - 48) * 3;
+    sum += (input.charCodeAt(10) - 48);
+    sum += (input.charCodeAt(11) - 48) * 3;
+
+    return check_digit === (10 - (sum % 10)) % 10;
 }
 
 /**
