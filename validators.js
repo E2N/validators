@@ -73,8 +73,9 @@ function digit_sum(value) {
 
 
 /**
- * A validation function for International Bank Account Numbers (IBAN).
- * This validator returns true if the input is in a compliant format and passes the check-digit validation.
+ * International Bank Account Numbers (IBAN).
+ *
+ * Returns true if the input is in a compliant format and passes the check-digit validation.
  * An IBAN is validated by converting it into an integer and performing mod-97 operation (as described in ISO 7064) on it.
  * @public
  * @param {string} input
@@ -275,7 +276,7 @@ function vsnr(input) {
 }
 
 /**
- * Verifies a International Article Number (EAN). The same numbers can be referred to as GTINs.
+ * Verifies an International Article Number (EAN). The same numbers can be referred to as GTINs.
  * @public
  * @param {string} input 
  * @returns {boolean}
@@ -339,10 +340,40 @@ function nir(input) {
     }
 
     /* syymmlloookkk cc */
-    let number = parseInt(input.slice(0, 13));
-    let check_digit = parseInt(input.slice(13));
+    let number = parseInt(input.slice(0, 13), 10);
+    let check_digit = parseInt(input.slice(13), 10);
 
     return check_digit === 97 - number % 97;
+}
+
+function pan(input) {
+    /* Null, undefined and blank check                                                                      */
+    if (!input) {
+        return false;
+    }
+
+    /* Type check                                                                                           */
+    if (typeof input !== "string") {
+        return false;
+    }
+
+    let sum = 0;
+    let even = false;
+
+    for (let i = input.length - 1; i >= 0; i--) {
+        let n = input[i].charCodeAt(0) - 48;
+
+        if (even) {
+            n = n * 2;
+        }
+
+        sum += parseInt(n / 10, 10);
+        sum += n % 10;
+
+        even = !even;
+    }
+
+    return sum % 10 === 0;
 }
 
 module.exports = {
@@ -350,5 +381,6 @@ module.exports = {
     isbn,
     vsnr,
     ean,
-    nir
+    nir,
+    pan
 }

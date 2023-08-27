@@ -1,7 +1,9 @@
-# A JavaScript module of validation functions. 
+# A JavaScript module of validation functions 
 
-A validation functions verifies user input. A validation function returns true or false 
-depending on the user input. Usually is a checksum involved. The only purpose is to check the validity of the input value.
+A validation function returns true or false depending on the user input. 
+Validation functions are used to verify data integrity but are not relied upon to verify data authenticity.
+In other words: validation functions are primarily a safeguard against simple user errors or random input. 
+They are designed to protect against accidental errors not malicious attacks.
 
 ## Validation functions
 
@@ -13,10 +15,10 @@ This module contains several common validation functions:
 - numéro d'inscription au répertoire (NIR)
 - Canadian Social Insurance Number (SIN)
 - Social Security Number (SSN)
-- Codice fiscale
+- Codice fiscale (CF)
 - National Insurance number (NI)
 - Documento nacional de identidad (DNI)
-- NHS number
+- NHS number (NHS)
 - Österreichische Sozialversicherungsnummer 
 - Deutscher Personalausweis
 - International Article Number (EAN)

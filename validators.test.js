@@ -1,4 +1,4 @@
-const { iban, vsnr, ean, isbn, nir } = require("./validators");
+const { iban, vsnr, ean, isbn, nir, pan } = require("./validators");
 
 describe('iban', function() {
     test.each([
@@ -200,6 +200,29 @@ describe('isbn', function() {
         ["9789295055128", false],
         ["9789295055129", false]
     ])('%s', (input, expected) => expect(isbn(input)).toBe(expected));
+})
+
+/**
+ * Reference: https://www.paypalobjects.com/en_GB/vhelp/paypalmanager_help/credit_card_numbers.htm
+ */
+describe('pan', function() {
+    test.each([
+        ["378282246310005", true],
+        ["371449635398431", true],
+        ["378734493671000", true],
+        ["5610591081018250", true],
+        ["30569309025904", true],
+        ["38520000023237", true],
+        ["6011111111111117", true],
+        ["6011000990139424", true],
+        ["3530111333300000", true],
+        ["3566002020360505", true],
+        ["5555555555554444", true],
+        ["5105105105105100", true],
+        ["4111111111111111", true],
+        ["4012888888881881", true],
+        ["4222222222222", true]
+    ])('%s', (input, expected) => expect(pan(input)).toBe(expected));
 })
 
 describe('nir', function() {
