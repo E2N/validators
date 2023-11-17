@@ -24,7 +24,7 @@
 "use strict";
 
 /**
- * @module @e2ngmbh/validators
+ * @module @e2n/validators
  */
 
 function luhn(input) {
